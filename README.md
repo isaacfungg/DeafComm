@@ -4,9 +4,9 @@
 This project aims to facilitate communication among the deaf community through a cross-platform mobile application developed using React Native. The app incorporates real-time text conversion and text-to-speech features to enhance communication accessibility.
 
 <div style="display: flex;">
-    <img src="https://i.imgur.com/moyuuC3.jpeg" alt="Image 3" width="300" />
-    <img src="https://i.imgur.com/DtBmSp6.jpeg" alt="Image 1" width="300" />
-    <img src="https://i.imgur.com/PJv65Vu.jpeg" alt="Image 2" width="300" />
+    <img src="https://i.imgur.com/moyuuC3.jpeg" alt="Image 3" width="250" />
+    <img src="https://i.imgur.com/DtBmSp6.jpeg" alt="Image 1" width="250" />
+    <img src="https://i.imgur.com/PJv65Vu.jpeg" alt="Image 2" width="250" />
 </div>
 
 
