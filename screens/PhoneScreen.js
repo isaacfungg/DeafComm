@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { SafeAreaView, View, Text, TouchableOpacity, StyleSheet, TextInput, Image, StatusBar } from 'react-native';
 import { useNavigation, useFocusEffect, useRoute } from '@react-navigation/native';
+const twilioClient = new Twilio('', '');
 
 import images from '../assets/images';
 
@@ -20,7 +21,8 @@ export default function PhoneScreen() {
     };
 
     const handleCallPress = () => {
-        navigation.navigate('Screen Stack', { screen: 'Call Screen' })
+        navigation.navigate('Screen Stack', { screen: 'Call Screen' });
+        setInputValue("");
     };
 
     const handleDeletePress = () => {
@@ -36,6 +38,14 @@ export default function PhoneScreen() {
             }
         }, [route.params?.call])
       );
+
+      const makeCall = () => {
+        twilioClient.calls.create({
+            twiml: '<Response><Say>Hello, this is a test call.</Say></Response>',
+            to: inputValue,
+            from: 'YOUR_TWILIO_PHONE_NUMBER'
+        }).then(handleCallPress);
+    };
 
     return (
         <SafeAreaView style={styles.safeArea}>

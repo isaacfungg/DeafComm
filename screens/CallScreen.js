@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, StatusBar, KeyboardAvoidingView, ScrollView, Keyboard, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const client = require('twilio')(accountSid, authToken);
+import Tts from 'react-native-tts';
+import axios from 'axios';
 
 const CallScreen = () => {
     const [textInput, setTextInput] = useState('');
@@ -12,23 +11,47 @@ const CallScreen = () => {
     const [callDuration, setCallDuration] = useState(0);
     const navigation = useNavigation();
   
-    const sendMessage = () => {
+    const sendMessage = async () => {
       console.log("Sending message:", textInput);
-      setTextInput(''); 
+      setTextToAudio(textInput);
+      Tts.getInitStatus().then(() => {
+          Tts.speak(textInput);
+      });
+      setTextInput('');
+
+      try {
+          const response = await axios.post('', {
+              message: textInput
+          });
+          console.log('Twilio Response:', response.data);
+      } catch (error) {
+          console.error('Error sending message to Twilio:', error);
+      }
+  };
+
+    const startListening = async () => {
+        try {
+            await Voice.start('en-US');
+            console.log('Listening...');
+        } catch (error) {
+            console.error('Error starting voice recognition:', error);
+        }
+      };
+
+    const stopListening = async () => {
+        try {
+            await Voice.stop();
+            console.log('Stopped listening.');
+            console.log('Recognized text:', audioToText);
+            setTextInput(audioToText);
+        } catch (error) {
+            console.error('Error stopping voice recognition:', error);
+        }
     };
   
     const endCall = () => {
         navigation.navigate('Phone', { call: false });
     };
-    
-    client.calls
-      .create({
-         twiml: '<Response><Say>Ahoy, World!</Say></Response>',
-         to: '+14155551212',
-         from: '+15017122661'
-       })
-      .then(call => console.log(call.sid));
-    
   
     const formatCallDuration = (duration) => {
       const hours = Math.floor(duration / 3600);
