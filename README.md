@@ -5,8 +5,8 @@ This project aims to facilitate communication among the deaf community through a
 
 <div style="display: flex;">
     <img src="https://i.imgur.com/moyuuC3.jpeg" alt="Image 3" width="250" />
+    <img src="https://i.imgur.com/3DMQjRs.png" alt="Image 2" width="250" />
     <img src="https://i.imgur.com/DtBmSp6.jpeg" alt="Image 1" width="250" />
-    <img src="https://i.imgur.com/PJv65Vu.jpeg" alt="Image 2" width="250" />
 </div>
 
 
