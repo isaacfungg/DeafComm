@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { SafeAreaView, View, Text, TouchableOpacity, StyleSheet, TextInput, Image, StatusBar } from 'react-native';
 import { useNavigation, useFocusEffect, useRoute } from '@react-navigation/native';
+
 import images from '../assets/images';
 
 export default function PhoneScreen() {
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     safeArea: {
         flex: 1, 
         width: '100%', 
-        backgroundColor: '#23395d', // Match the background color of the container
+        backgroundColor: '#23395d', 
     },
     container: {
         flex: 1,

@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, StatusBar, KeyboardAvoidingView, ScrollView, Keyboard, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
 
 const CallScreen = () => {
     const [textInput, setTextInput] = useState('');
@@ -18,6 +21,13 @@ const CallScreen = () => {
         navigation.navigate('Phone', { call: false });
     };
     
+    client.calls
+      .create({
+         twiml: '<Response><Say>Ahoy, World!</Say></Response>',
+         to: '+14155551212',
+         from: '+15017122661'
+       })
+      .then(call => console.log(call.sid));
     
   
     const formatCallDuration = (duration) => {
